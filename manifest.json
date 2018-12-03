@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "git readme read",
+  "description": "git readme read",
+  "version": "1.0",
+  	"content_scripts": //用于配置注入页面中的脚本
+	[
+		{
+			//"matches": ["http://*/*", "https://*/*"],
+			// "<all_urls>" 表示匹配所有地址
+			"matches": ["<all_urls>"],
+			// 多个JS按顺序注入
+			"js": [ "js/content-script.js"],
+			"css":["css/content.css"],
+			// JS的注入可以随便一点，但是CSS的注意就要千万小心了，因为一不小心就可能影响全局样式
+			// 代码注入的时间，可选值： "document_start", "document_end", or "document_idle"，最后一个表示页面空闲时，默认document_idle
+			"run_at": "document_start"
+		}
+	],
+	"background":{//运行在chrome环境中的 
+		"script":["js/background.js"]
+	},
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  }
+}

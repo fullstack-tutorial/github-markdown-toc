@@ -1,0 +1,20 @@
+#panel{
+	position: fixed;
+	width: 150px;
+	min-height: 200px;
+	z-index: 999;
+	right: 0px;
+	top: 60px;
+	background: rgba(33,55,61,0.7);
+
+}
+#panel ul{
+	list-style: none;
+}
+#panel ul li{
+	list-style: none;
+}
+#panel ul li a{
+	display: block;
+	text-overflow: ellipsis;
+}
