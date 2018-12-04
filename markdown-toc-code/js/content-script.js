@@ -42,28 +42,36 @@ function init(list) {
     var stack = new Array();
 
 
+    var firstLevel = 0;
+    var isGetFisrtLevel = false;
 
     for (var i = 0; i < list.length; i++) {
         var header = list[i];
+
         // debugger;
         var hreftagname = header.firstElementChild.hash;
         var level = parseInt(header.tagName.replace('H', ''), 10);
+        if(!isGetFisrtLevel){
+            // console.log("exec");
+            firstLevel = level;
+            isGetFisrtLevel = true;
+        }
 
         var li = document.createElement("li");
         addStyle(li, {"listStyle": "none"});
 
-
         var a = document.createElement("a");
         addStyle(a, {"color": "#0366d6","textOverflow ": "ellipsis"});
 
-
         // a.innerHTML = level + header.textContent;
 
-        if(level == 1){
+        console.log("firstLevel  "+firstLevel);
+        console.log("level "+level);
+        if( level == firstLevel ){
             a.innerHTML = header.textContent;
         }
         else{
-            a.innerHTML = new Array(level * 3).join('&nbsp;')  + header.textContent;
+            a.innerHTML = new Array(level * 2).join('&nbsp;')  + header.textContent;
         }
         a.setAttribute("href", hreftagname);
         // li.appendChild(a);
