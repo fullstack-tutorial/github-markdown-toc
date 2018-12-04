@@ -1,4 +1,4 @@
-# GitHub-Markdown-Toc
+# GitHub-Markdown-TOC
 
 ## About
 
