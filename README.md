@@ -18,6 +18,18 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 
 
+
+
+## How to use
+
+使用说明...
+
+
+
+
+
+
+
 ## Contributors
 
 <a href="https://github.com/dxiaoqi">
@@ -28,3 +40,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 </a> 
 
 
+
+## Update
+
+`2018/12/04`：v0.0.1 software is born
