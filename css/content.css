@@ -1,11 +1,11 @@
 #panel{
 	position: fixed;
-	width: 150px;
+	width: 400px;
 	min-height: 200px;
 	z-index: 999;
 	right: 0px;
 	top: 60px;
-	background: rgba(33,55,61,0.7);
+	background: gainsboro;
 
 }
 #panel ul{
