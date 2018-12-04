@@ -14,7 +14,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 **or like this**
 
-![1543907266250](assets/1543907266250.png)
+![1543907432998](assets/1543907432998.png)
 
 
 
