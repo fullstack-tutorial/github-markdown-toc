@@ -8,23 +8,22 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 
 
-like this：
+**like this**
 
-![1543906293014](assets/1543906293014.png)
+![1543907190399](assets/1543907190399.png)
 
+**or like this**
 
-
-or like this:
-
-![1543906339292](assets/1543906339292.png)
+![1543907266250](assets/1543907266250.png)
 
 
 
 ## Contributors
 
-　　<a href="https://github.com/dxiaoqi">
+<a href="https://github.com/dxiaoqi">
  <img src="https://avatars0.githubusercontent.com/u/17349750?s=460&v=4" width="50px">
-</a> 　　<a href="https://github.com/frank-lam">
+</a>
+<a href="https://github.com/frank-lam">
  <img src="https://avatars1.githubusercontent.com/u/19153458?s=460&v=4" width="50px">
 </a> 
 
