@@ -37,4 +37,6 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 ## Update
 
-`2018/12/04`：v0.0.1 software is born
+- v0.0.1 `2018-12-04`
+  - software is born
+
