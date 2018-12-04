@@ -18,7 +18,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 由于目前插件暂未上传至插件市场，需要手动下载。
 
-1. 下载本仓库根目录文件 `markdown-toc-code.crx`，点击下载
+1. 下载本仓库根目录文件 `markdown-toc-code.crx`，[点击下载](https://github.com/fullstack-tutorial/github-markdown-toc/blob/master/markdown-toc-code.crx?raw=true)
 2. 直接将 `crx` 扩展文件拖动到 chrome 任意位置，添加即可安装
 3. 打开任意一个 GitHub 仓库，即可预览左侧目录
 
