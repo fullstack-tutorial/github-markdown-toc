@@ -20,42 +20,23 @@
 
 /* 目录栏的样式 */
 .div_toc{
-	width: 90%;
+	width: -webkit-calc(100% - 10px);
+	height: 100%;
 	float: left;
-	/*  */
-	/* 
 	padding: 20px;
-	border-radius: 3px;
-	width: 400px;
-	height: 85%;
-	min-height: 200px;
-	z-index: 999;
-	left: 10px;
-	top: 70px;
-	bottom: 20px;
-	overflow-x: hidden;
 	overflow: auto;
+	overflow-x: hidden;
 	background-color: #fafbfc;
 	border: 1px solid #d1d5da;
-	float: right; */
-	/* width: 400px;
-	min-height: 200px;
-	z-index: 999;
-	background-color: #fafbfc;
-	border: 1px solid #d1d5da;
-	overflow-x: hidden;
-	left: 10px;
-	top: 70px;
-	border-radius: 3px;
-	overflow: auto;
-	height: 85%;
-	bottom: 100px;
-	float: left; */
-	/* cursor: e-resize; */
+
 }
 
 .div_right_bar{
-	width:10px; background: red; cursor: e-resize; float: left;
+	width: 10px; 
+	height: 100%;
+	background-color: white; 
+	cursor: e-resize; 
+	float: left;
 }
 
 .toc{
@@ -63,14 +44,10 @@
 	width: 400px;
 	min-height: 200px;
 	z-index: 999;
-	background-color: #fafbfc;
-	border: 1px solid #d1d5da;
-	padding: 20px;
-	overflow-x: hidden;
+
 	left: 10px;
 	top: 70px;
 	border-radius: 3px;
-	overflow: auto;
 	height: 85%;
 	bottom: 100px;
 	float: left;

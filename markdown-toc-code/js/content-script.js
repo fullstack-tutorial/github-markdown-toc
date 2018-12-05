@@ -39,7 +39,7 @@ function init(list) {
     var div_right_bar = document.createElement("div");  // 这是一个 拖动bar
     div_right_bar.setAttribute('id', "div_right_bar");
     div_right_bar.setAttribute("class", "div_right_bar"); 
-    div_right_bar.textContent = "bar";
+    div_right_bar.textContent = "";
 
 
 
@@ -86,18 +86,16 @@ function init(list) {
     return toc;
 }
 
+
 // 这里是绑定resize事件的方法
 function bindResize(el) {
     //初始化参数
     var els = document.getElementById('toc').style;
-    
     //鼠标的 X 和 Y 轴坐标
     x = 0;
-
      //邪恶的食指
     el.onmousedown = function(e){
         //按下元素后，计算当前鼠标与对象计算后的坐标
-
         x = e.clientX - el.offsetWidth,
         y = e.clientY - el.offsetHeight;
         console.log(x);
@@ -125,6 +123,10 @@ function bindResize(el) {
     function mouseMove(e) {
         //宇宙超级无敌运算中...
         els.width = e.clientX - x + 'px';
+        els.width = e.clientX - 10 + 'px';
+        console.log("clientX:"+e.clientX);
+        console.log("x:"+x);
+        
     }
     //停止事件
     function mouseUp() {
@@ -138,10 +140,7 @@ function bindResize(el) {
                 function(){
                     document.removeEventListener("mousemove", mouseMove);
                     document.removeEventListener("mouseup", mouseUp);
-                }()
-                //卸载事件
-                // 这里也需要改写，你帮我看下啊。这样对吗？1
-               
+                }()               
             );
     }
 }
