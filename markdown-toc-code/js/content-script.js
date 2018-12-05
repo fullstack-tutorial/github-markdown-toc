@@ -53,9 +53,26 @@ function init(list) {
 
         var hreftagname = header.firstElementChild.hash;
         var level = parseInt(header.tagName.replace('H', ''), 10);
+        
         if(!isGetFisrtLevel){
             firstLevel = level;
             isGetFisrtLevel = true;
+
+            var header_p = document.createElement("li");
+            header_p.textContent = "Article TOC for GitHub";
+            addStyle(header_p, {"listStyle": "none","font-size":"20px","margin-bottom":"10px"});
+
+            var gotop_li = document.createElement("li");
+            var gotop_li = document.createElement("li");
+            addStyle(gotop_li, {"listStyle": "none"});
+            var gotop_a = document.createElement("a");
+            addStyle(gotop_a, {"color": "#0366d6","textOverflow ": "ellipsis","font-weight":"bold"});
+            gotop_a.innerHTML = "▲ GO TOP";
+            gotop_a.setAttribute("href", "#");
+            div_toc.appendChild(header_p);
+
+            div_toc.appendChild(gotop_li);
+            div_toc.lastChild.appendChild(gotop_a);
         }
 
         var li = document.createElement("li");
@@ -65,11 +82,9 @@ function init(list) {
         addStyle(a, {"color": "#0366d6","textOverflow ": "ellipsis"});
 
         // a.innerHTML = level + header.textContent;
-
-        console.log("firstLevel  "+firstLevel);
-        console.log("level "+level);
         if( level == firstLevel ){
             a.innerHTML = header.textContent;
+            addStyle(a, {"font-weight":"bold"});
         }
         else{
             a.innerHTML = new Array(level * 2).join('&nbsp;')  + header.textContent;
