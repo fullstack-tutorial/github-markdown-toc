@@ -123,7 +123,7 @@ function bindResize(el) {
     function mouseMove(e) {
         //宇宙超级无敌运算中...
         els.width = e.clientX - x + 'px';
-        els.width = e.clientX - 10 + 'px';
+        els.width = e.clientX  + 'px';
         console.log("clientX:"+e.clientX);
         console.log("x:"+x);
         

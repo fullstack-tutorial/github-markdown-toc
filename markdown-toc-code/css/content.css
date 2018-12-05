@@ -20,7 +20,7 @@
 
 /* 目录栏的样式 */
 .div_toc{
-	width: -webkit-calc(100% - 10px);
+	width: -webkit-calc(100% - 6px);
 	height: 100%;
 	float: left;
 	padding: 20px;
@@ -28,11 +28,10 @@
 	overflow-x: hidden;
 	background-color: #fafbfc;
 	border: 1px solid #d1d5da;
-
 }
 
 .div_right_bar{
-	width: 10px; 
+	width: 6px; 
 	height: 100%;
 	background-color: white; 
 	cursor: e-resize; 
