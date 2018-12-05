@@ -17,3 +17,39 @@
 	display: block;
 	text-overflow: ellipsis;
 }
+
+/* 目录栏的样式 */
+.div_toc{
+	width: -webkit-calc(100% - 10px);
+	height: 100%;
+	float: left;
+	padding: 20px;
+	overflow: auto;
+	overflow-x: hidden;
+	background-color: #fafbfc;
+	border: 1px solid #d1d5da;
+
+}
+
+.div_right_bar{
+	width: 10px; 
+	height: 100%;
+	background-color: white; 
+	cursor: e-resize; 
+	float: left;
+}
+
+.toc{
+	position: fixed;
+	width: 400px;
+	min-height: 200px;
+	z-index: 999;
+
+	left: 10px;
+	top: 70px;
+	border-radius: 3px;
+	height: 85%;
+	bottom: 100px;
+	float: left;
+}
+
