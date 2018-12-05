@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "git readme read",
-  "description": "git readme read",
-  "version": "1.0",
+  "name": "GitHub-Markdown-TOC",
+  "description": "a markdown toc tool for GitHub Article",
+  "version": "0.0.1",
   	"content_scripts": //用于配置注入页面中的脚本
 	[
 		{
@@ -18,7 +18,7 @@
 			"run_at": "document_start"
 		}
 	],
-	"background":{//运行在chrome环境中的 
+	"background":{// 运行在chrome环境中的 
 		"script":["js/background.js"]
 	},
   "browser_action": {
