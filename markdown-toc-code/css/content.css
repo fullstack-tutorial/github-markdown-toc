@@ -38,17 +38,23 @@
 	float: left;
 }
 
+/* 这个地方 */
+
 .toc{
 	position: fixed;
-	width: 400px;
+	width: 350px;
 	min-height: 200px;
-	z-index: 999;
+	z-index: 999; 
+	min-width: 200px;
 
-	left: 10px;
-	top: 70px;
-	border-radius: 3px;
-	height: 85%;
+	left: 0px;
+	top: 0px;
+	border-radius: 0px;
+	height: 100%;
 	bottom: 100px;
 	float: left;
 }
 
+body{
+	margin-left: 350px;
+}

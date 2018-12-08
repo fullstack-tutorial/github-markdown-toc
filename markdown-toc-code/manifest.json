@@ -22,7 +22,7 @@
 		"script":["js/background.js"]
 	},
   "browser_action": {
-    "default_icon": "img/icon.png",
+    "default_icon": "img/logo.ico",  // https://www.easyicon.net/1201150-menu_icon.html
     "default_popup": "popup.html"
   }
 }
