@@ -10,7 +10,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 **like the rendering graphics below, this must make you very excited !**
 
-![markdown-toc2](assets/markdown-toc.gif)
+![markdown-toc-2](assets/markdown-toc-2.gif)
 
 
 
@@ -40,4 +40,8 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 - 2018-12-04 : version 0.0.1
   - features
     - software is born
+- 2018-12-08 : version 0.0.2
+  - features
+    - 侧边栏显示，不遮挡正文内容
+    - 拖动自适应效果
 
