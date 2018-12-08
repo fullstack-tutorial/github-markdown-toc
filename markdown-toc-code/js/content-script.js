@@ -48,6 +48,8 @@ const domInit = function(){
 
     // 因为你这里你根本不知道页面结构到底加载好了没 资源  z加载enme完毕了吗
     document.querySelector('.Header').style.paddingLeft = '350px';
+    // document.querySelector('#js-repo-pjax-container').style.paddingLeft = '350px';
+    
     
     // document.getElementsByTagName('html')[0].style.marginLeft  = "350px";
 }
@@ -90,7 +92,7 @@ function init(list) {
             isGetFisrtLevel = true;
 
             var header_p = document.createElement("li");
-            header_p.textContent = "Article TOC for GitHub";
+            header_p.textContent = "GitHub Markdown TOC";
             addStyle(header_p, {"listStyle": "none","font-size":"20px","margin-bottom":"10px"});
 
             var gotop_li = document.createElement("li");
@@ -167,6 +169,9 @@ function bindResize(el) {
 
     //移动事件
     function mouseMove(e) {
+        console.log(e);
+        // document.querySelector('#js-repo-pjax-container').style.paddingLeft = "0px";
+        // console.log
         //宇宙超级无敌运算中...  
         let w = document.body.clientWidth;
         let w2 = e.clientX + 'px';
@@ -186,8 +191,8 @@ function bindResize(el) {
         // console.log("e.clientX " + e.clientX);
     
         
-        var readmeWidth = document.getElementById("readme").clientWidth;
-        var maxWidth = document.getElementById("readme").clientWidth * 0.8;
+        // var readmeWidth = document.getElementById("readme").clientWidth;
+        // var maxWidth = document.getElementById("readme").clientWidth * 0.8;
         var minWidth = 200;
         var moveWidth = parseInt(e.clientX);
         if(moveWidth < 200){
@@ -195,8 +200,6 @@ function bindResize(el) {
         }
         var $header = document.querySelector('.Header');
        
-        
-   
         
         if(moveWidth > minWidth && e.clientX > containerClient.left){
             document.getElementsByTagName('html')[0].style.marginLeft = w2;
