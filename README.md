@@ -10,7 +10,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 **like the rendering graphics below, this must make you very excited !**
 
-![markdown-toc2](assets/markdown-toc.gif)
+![markdown-toc-2](assets/markdown-toc-2.gif)
 
 
 

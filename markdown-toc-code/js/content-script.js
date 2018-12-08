@@ -47,13 +47,49 @@ const domInit = function(){
     containerClient =  $container.getClientRects()[0];
 
     // 因为你这里你根本不知道页面结构到底加载好了没 资源  z加载enme完毕了吗
-    document.querySelector('.Header').style.paddingLeft = '350px';
+    // document.querySelector('.Header').style.paddingLeft = '350px';
+    initTocBar(350);
     // document.querySelector('#js-repo-pjax-container').style.paddingLeft = '350px';
     
     
     // document.getElementsByTagName('html')[0].style.marginLeft  = "350px";
 }
 document.addEventListener('DOMContentLoaded',domInit,false);
+
+
+function initTocBar(initWidth){
+    var els = document.getElementById('toc').style;
+
+    //宇宙超级无敌运算中...  
+    let w = document.body.clientWidth;
+    let w2 = initWidth + 'px';
+
+    var minWidth = 200;
+    var moveWidth = parseInt(initWidth);
+    if(moveWidth < 200){
+        return;
+    }
+    var $header = document.querySelector('.Header');
+    
+    
+    if(moveWidth > minWidth && initWidth > containerClient.left){
+        document.getElementsByTagName('html')[0].style.marginLeft = w2;
+        $header.style.paddingLeft = 0 + 'px';
+        // $container.style.marginLeft = '10px';
+        $container.style.marginLeft = '10px';
+        $repoheadDetailsContainer.style.marginLeft = '10px';
+        $jsRepoNav.style.marginLeft = '10px';
+    }else{
+        $header.style.paddingLeft = moveWidth + 'px';
+        document.getElementsByTagName('html')[0].style.marginLeft = 0;
+        $container.style.marginLeft = 'auto';
+        $repoheadDetailsContainer.style.marginLeft = 'auto';
+        $jsRepoNav.style.marginLeft = 'auto';
+    }
+    els.width = initTocBar  + 'px';
+}
+
+
 
 //  这里是画出 toc的逻辑
 function init(list) {
@@ -226,7 +262,6 @@ function bindResize(el) {
 
 
         els.width = e.clientX  + 'px';
-        
     }
     //停止事件
     function mouseUp() {
