@@ -16,23 +16,22 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 ## How to use
 
-由于目前插件暂未上传至插件市场，需要手动下载。
+目前已在 Chrome 市场上架，点击链接前往安装 [Chrome Extension：GitHub-Markdown-TOC](https://chrome.google.com/webstore/detail/github-markdown-toc/hjjnbcjiekmpmkbogjkpchdblioffihb?hl=zh-CN)
 
-1. 下载本仓库根目录文件 `markdown-toc-code.crx`，[点击下载](https://github.com/fullstack-tutorial/github-markdown-toc/blob/master/markdown-toc-code.crx?raw=true)
-2. 直接将 `crx` 扩展文件拖动到 chrome 任意位置，添加即可安装（下载后浏览器直接打开也可安装）
-3. 打开任意一个 GitHub 仓库，即可预览左侧目录
+![1545712158274](assets/1545712158274.png)
 
 
 
 ## Contributors
-
-<a href="https://github.com/dxiaoqi">
- <img src="https://avatars0.githubusercontent.com/u/17349750?s=460&v=4" width="50px">
-</a>
 <a href="https://github.com/frank-lam">
  <img src="https://avatars1.githubusercontent.com/u/19153458?s=460&v=4" width="50px">
 </a> 
-
+<a href="https://github.com/dxiaoqi">
+ <img src="https://avatars0.githubusercontent.com/u/17349750?s=460&v=4" width="50px">
+</a>
+<a href="https://github.com/dzeze">
+ <img src="https://avatars2.githubusercontent.com/u/26563336?s=460&v=4" width="50px">
+</a>
 
 
 ## Update
@@ -44,4 +43,6 @@ This is a chrome extension that supports parsing articles on GitHub and generati
   - features
     - 侧边栏显示，不遮挡正文内容
     - 拖动自适应效果
+- 2018-12-25
+  - chrome 市场上架
 
