@@ -18,6 +18,10 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 目前已在 Chrome 市场上架，点击链接前往安装 [Chrome Extension：GitHub-Markdown-TOC](https://chrome.google.com/webstore/detail/github-markdown-toc/hjjnbcjiekmpmkbogjkpchdblioffihb?hl=zh-CN)
 
+**支持浏览器**：chrome浏览器，还可以运行在所有 webkit 内核的国产浏览器，比如 360 极速浏览器、360 安全浏览器、搜狗浏览器、QQ 浏览器等等
+
+
+
 ![1545712158274](assets/1545712158274.png)
 
 
