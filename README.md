@@ -4,7 +4,7 @@
 
 This is a chrome extension that supports parsing articles on GitHub and generating a sidebar directory for indexing of article titles.
 
-> 这是一款 chrome 扩展，支持对 GitHub 上的文章进行解析，生成侧边栏目录，为 GitHub  而生的，文章标题目录索引扩展。
+> 这是一款 chrome 扩展，支持对 GitHub 上的文章进行解析，生成侧边栏文章标题目录。为 GitHub  而生的，文章标题目录索引扩展。
 
 
 
@@ -31,7 +31,7 @@ Currently available on the Chrome Market, click on the link to install : [Chrome
 
 
 
-## suggestion about us
+## Suggestion about us
 
 Leave your experience feeling below
 
