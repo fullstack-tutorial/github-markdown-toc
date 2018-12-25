@@ -16,9 +16,14 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 ## How to use
 
-目前已在 Chrome 市场上架，点击链接前往安装 [Chrome Extension：GitHub-Markdown-TOC](https://chrome.google.com/webstore/detail/github-markdown-toc/hjjnbcjiekmpmkbogjkpchdblioffihb?hl=zh-CN)
+Currently available on the Chrome Market, click on the link to install : [Chrome Extension：GitHub-Markdown-TOC](https://chrome.google.com/webstore/detail/github-markdown-toc/hjjnbcjiekmpmkbogjkpchdblioffihb?hl=zh-CN)
 
-**支持浏览器**：chrome浏览器，还可以运行在所有 webkit 内核的国产浏览器，比如 360 极速浏览器、360 安全浏览器、搜狗浏览器、QQ 浏览器等等
+**Support browser**: chrome browser, can also run in all chrome kernel browsers
+
+> 目前已在 Chrome 市场上架，点击链接前往安装 [Chrome Extension：GitHub-Markdown-TOC](https://chrome.google.com/webstore/detail/github-markdown-toc/hjjnbcjiekmpmkbogjkpchdblioffihb?hl=zh-CN)
+>
+
+> **支持浏览器**：chrome浏览器，还可以运行在所有 webkit 内核的国产浏览器，比如 360 极速浏览器、360 安全浏览器、搜狗浏览器、QQ 浏览器等等
 
 
 
@@ -26,7 +31,22 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 
 
 
+## suggestion about us
+
+Leave your experience feeling below
+
+> 在下面可以留下你的体验感受哦
+
+https://github.com/fullstack-tutorial/github-markdown-toc/issues/6
+
+
+
 ## Contributors
+
+This is a partner of open source contributions, and interested friends are welcome to join the open source team. You can contact me by email, `frank_lin@whu.edu.cn`
+
+> 这是开源贡献的小伙伴们，欢迎感兴趣朋友加入开源小组。可以通过邮箱联系我，frank_lin@whu.edu.cn
+
 <a href="https://github.com/frank-lam">
  <img src="https://avatars1.githubusercontent.com/u/19153458?s=460&v=4" width="50px">
 </a> 
@@ -36,6 +56,7 @@ This is a chrome extension that supports parsing articles on GitHub and generati
 <a href="https://github.com/dzeze">
  <img src="https://avatars2.githubusercontent.com/u/26563336?s=460&v=4" width="50px">
 </a>
+
 
 
 ## Update
