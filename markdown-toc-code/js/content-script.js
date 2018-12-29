@@ -86,8 +86,6 @@ function init(list) {
   div_right_bar.setAttribute("class", "div_right_bar");
   div_right_bar.textContent = "";
 
-  var toc_ul = document.createElement("ul");
-
   var firstLevel = 0;
   var isGetFisrtLevel = false;
 
@@ -148,6 +146,29 @@ function init(list) {
   toc.appendChild(div_top);
   toc.appendChild(div_toc);
   toc.appendChild(div_right_bar);
+
+  var div_shrink = document.createElement("div");
+  div_shrink.innerHTML =
+    '<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1546073873342" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1761" data-spm-anchor-id="a313x.7781069.0.i1" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32"><defs><style type="text/css"></style></defs><path d="M866.8672 257.024H157.184c-30.208 0-54.6304-22.8864-54.6304-51.2 0-28.2624 24.4736-51.2 54.6304-51.2H866.816c30.208 0 54.6304 22.9376 54.6304 51.2 0 28.3136-24.4736 51.2-54.6304 51.2z m0 307.2H157.184c-30.208 0-54.6304-22.8864-54.6304-51.2 0-28.2624 24.4736-51.2 54.6304-51.2H866.816c30.208 0 54.6304 22.9376 54.6304 51.2 0 28.3136-24.4736 51.2-54.6304 51.2z m0 307.2H157.184c-30.208 0-54.6304-22.8864-54.6304-51.2 0-28.2624 24.4736-51.2 54.6304-51.2H866.816c30.208 0 54.6304 22.9376 54.6304 51.2 0 28.3136-24.4736 51.2-54.6304 51.2z" fill="#333333" p-id="1762"></path></svg>';
+  addStyle(div_shrink, {
+    width: "32px",
+    height: "32px",
+    display: "inline-block",
+    position: "absolute",
+    bottom: "10px"
+  });
+  var isExpand = true;
+  div_shrink.addEventListener("click", function() {
+    var div = _$("#toc"),
+      w = div.clientWidth || div.offsetWidth;
+    isExpand
+      ? addStyle(div, {
+          transform: "translateX(-" + w + "px)"
+        })
+      : addStyle(div, { transform: "translateX(0px)" });
+    isExpand = !isExpand;
+  });
+  toc.appendChild(div_shrink);
   return toc;
 }
 
