@@ -8,105 +8,391 @@ function addStyle(obj, atrr) {
     }
 }
 
-setTimeout(function () {
-    var git_reg = /[https://github.com].*/;
+
+
+function deepClone(obj){
+    //深克隆
+    if(typeof obj!=='object'||obj==null)return obj;
+    var _obj={};
+    for(var key in obj){
+        _obj[key]=deepClone(obj[key]);
+    }
+    return _obj;
+}
+
+function _Proxy(target,handle){
+    //模拟Proxy
+    var _target=deepClone(target);
+    for (var key in _target) {
+
+        Object.defineProperty(_target,key,{
+            // get:function(){
+            //  handle.get(_target,key);
+            // },
+            set:function(val){
+                console.log(val)
+                handle.set(_target,key,val);
+                target[key]=val;
+            }
+        })
+    }
+    return _target;
+}
+
+
+
+function A(){
+    //订阅观察者
+    this.events={};
+}
+A.prototype.sub = function(ev,cb){
+    var self=this;
+    if(!self.events.hasOwnProperty(ev)){
+        self.events[ev]=[];
+    }
+    return self.events[ev].push(cb);
+};
+A.prototype.pub = function(ev,data){
+    var data=data||{};
+    var self=this;
+    if(!self.events.hasOwnProperty(ev)){
+        return [];
+    }
+    for(var i=0;i<self.events[ev].length;i++){
+        self.events[ev][i](data);
+    }
+};
+
+function Store(option){
+    //状态管理
+    var self=this;
+    self.action={};
+    self.events=new A();
+    self.status='RESTING';
+    self.state=_Proxy(option,{
+        set:function(state,key,value){
+            //console.log(state+"key"+key+"value"+value)
+            self.events.pub('changeState',self.state,key,value);
+        }
+    })
+    if(option.hasOwnProperty('action')){
+        self.action=option.action;
+    }
+
+}
+Store.prototype.addEvent = function(cb){
+    //事件注册，传值暂有bug
+    var self=this;
+    self.events.sub('changeState',cb);
+    return this;
+};
+var store=new Store({
+    scrollLeft:0,
+    scrollTop:0
+});
+store.addEvent(function(state,key,value){
+    console.log()
+})
+
+//提交记录
+// Store.prototype.commit = function(actionKey, payload){
+//  var self = this;
+
+//  if(typeof self.actions[actionKey] !== 'function') {
+//     console.error("Action "+actionKey+" doesn't exist.");
+//     return false;
+//   }
+//  self.action[actionKey]=payload;
+//  return this;
+    
+// };
+Store.prototype.addEvent = function(cb){
+    //事件注册
+    var self=this;
+    self.events.sub('changeState',cb);
+    return this;
+};
+
+// Github页面 过去一秒后开始加载元素 渲染toc目录
+// setTimeout(function () {
+//     var git_reg = /[https://github.com].*/;
+//     if (git_reg.test(document.URL)) {
+//         var _readme = $('article');
+//         var data = _readme.querySelectorAll('h1,h2,h3');
+//         var div = init(data);
+//         document.body.appendChild(div);
+//     }
+//     // alert($(window).width);
+//     console.log(document.getElementById('div_right_bar'));
+//     bindResize(document.getElementById('div_right_bar'));
+//     // 因为你这里你根本不知道页面结构到底加载好了没 资源  z加载enme完毕了吗
+//     document.getElementsByTagName('html')[0].style.marginLeft  = "350px";
+// }, 1000)
+//看看 这里执行了吗
+let $container;
+let $repoheadDetailsContainer;
+let $jsRepoNav;
+let containerClient;
+const domInit = function(){
+    console.log(new Date().getTime(),'初始化开始')
+    var git_reg = /^https:\/\/github\.com.*/;//正则匹配错误
     if (git_reg.test(document.URL)) {
+        console.log(document.URL)
         var _readme = $('article');
         var data = _readme.querySelectorAll('h1,h2,h3');
-        // var data = _readme.querySelectorAll('h1,h2,h3,h4,h5,h6');
         var div = init(data);
         document.body.appendChild(div);
+
+    // alert($(window).width);
+    console.log(document.getElementById('div_right_bar'));
+    bindResize(document.getElementById('div_right_bar'));
+    const $idHtml = document.querySelector('#js-repo-pjax-container');
+    $container =  $idHtml.children[1];
+    $repoheadDetailsContainer = document.querySelector('.repohead-details-container');
+    $jsRepoNav = document.querySelector('.js-repo-nav');
+    containerClient =  $container.getClientRects()[0];
+
+    // 因为你这里你根本不知道页面结构到底加载好了没 资源  z加载enme完毕了吗
+    // document.querySelector('.Header').style.paddingLeft = '350px';
+    initTocBar(350);
+    // document.querySelector('#js-repo-pjax-container').style.paddingLeft = '350px';
     }
-}, 1000)
+    
+    // document.getElementsByTagName('html')[0].style.marginLeft  = "350px";
+}
+document.addEventListener('DOMContentLoaded',domInit,false);
 
-// 初始化
+
+function initTocBar(initWidth){
+    var els = document.getElementById('toc').style;
+
+    //宇宙超级无敌运算中...  
+    let w = document.body.clientWidth;
+    let w2 = initWidth + 'px';
+
+    var minWidth = 200;
+    var moveWidth = parseInt(initWidth);
+    if(moveWidth < 200){
+        return;
+    }
+    var $header = document.querySelector('.Header');
+    
+    
+    if(moveWidth > minWidth && initWidth > containerClient.left){
+        document.getElementsByTagName('html')[0].style.marginLeft = w2;
+        $header.style.paddingLeft = 0 + 'px';
+        // $container.style.marginLeft = '10px';
+        $container.style.marginLeft = '10px';
+        $repoheadDetailsContainer.style.marginLeft = '10px';
+        $jsRepoNav.style.marginLeft = '10px';
+    }else{
+        $header.style.paddingLeft = moveWidth + 'px';
+        document.getElementsByTagName('html')[0].style.marginLeft = 0;
+        $container.style.marginLeft = 'auto';
+        $repoheadDetailsContainer.style.marginLeft = 'auto';
+        $jsRepoNav.style.marginLeft = 'auto';
+    }
+    els.width = initTocBar  + 'px';
+}
+
+
+
+//  这里是画出 toc的逻辑
 function init(list) {
-    var toc = document.createElement("ul");
-    addStyle(toc, {
-        "position": "fixed",
-        "margin-right": "20px",
-        "padding": "20px",
-        "border-radius": "3px",
-        "width": "400px",
-        "height": "85%",
-        "min-height": "200px",
-        "z-index": 999,
-        "left": "10px",
-        "top": "70px",
-        "bottom": "20px",
-        "overflow-x": "hidden",
-        "overflow": "auto",
-        // "background": "gainsboro",
-        "border": "1px solid #d1d5da",
-    })
-    var stack = new Array();
+    var toc = document.createElement("div");
+    toc.setAttribute("class", "toc"); 
+    toc.setAttribute("id", "toc"); 
+
+    var div_top = document.createElement("div");
+    addStyle(div_top, {"width": "100%"});
+    div_top.setAttribute('id', "top");
+
+    var div_toc = document.createElement("div");
+    div_toc.setAttribute('id', "div_toc");
+    div_toc.setAttribute("class", "div_toc"); 
+
+    var div_right_bar = document.createElement("div");  // 这是一个 拖动bar
+    div_right_bar.setAttribute('id', "div_right_bar");
+    div_right_bar.setAttribute("class", "div_right_bar"); 
+    div_right_bar.textContent = "";
 
 
+
+    var toc_ul = document.createElement("ul");
+
+    var firstLevel = 0;
+    var isGetFisrtLevel = false;
 
     for (var i = 0; i < list.length; i++) {
         var header = list[i];
-        // debugger;
+
         var hreftagname = header.firstElementChild.hash;
         var level = parseInt(header.tagName.replace('H', ''), 10);
+        
+        if(!isGetFisrtLevel){
+            firstLevel = level;
+            isGetFisrtLevel = true;
+
+            var header_p = document.createElement("li");
+            header_p.textContent = "GitHub Markdown TOC";
+            addStyle(header_p, {"listStyle": "none","font-size":"20px","margin-bottom":"10px"});
+
+            var gotop_li = document.createElement("li");
+            var gotop_li = document.createElement("li");
+            addStyle(gotop_li, {"listStyle": "none"});
+            var gotop_a = document.createElement("a");
+            addStyle(gotop_a, {"color": "#0366d6","textOverflow ": "ellipsis","font-weight":"bold"});
+            gotop_a.innerHTML = "▲ GO TOP";
+            gotop_a.setAttribute("href", "#");
+            div_toc.appendChild(header_p);
+
+            div_toc.appendChild(gotop_li);
+            div_toc.lastChild.appendChild(gotop_a);
+        }
 
         var li = document.createElement("li");
         addStyle(li, {"listStyle": "none"});
 
-
         var a = document.createElement("a");
         addStyle(a, {"color": "#0366d6","textOverflow ": "ellipsis"});
 
-
         // a.innerHTML = level + header.textContent;
-
-        if(level == 1){
+        if( level == firstLevel ){
             a.innerHTML = header.textContent;
+            addStyle(a, {"font-weight":"bold"});
         }
         else{
-            a.innerHTML = new Array(level * 3).join('&nbsp;')  + header.textContent;
+            a.innerHTML = new Array(level * 2).join('&nbsp;')  + header.textContent;
         }
         a.setAttribute("href", hreftagname);
         // li.appendChild(a);
-        toc.appendChild(li);
-        toc.lastChild.appendChild(a);
-
-
-
-        // var level = parseInt(header.tagName.replace('H', ''), 10);
-        // // 通过两个where循环对栈进行调整,确保stack中标题级数与当前标题级数相同
-        // while (stack.length < level) {
-        //     stack.push(0);
-        // }
-        // while (stack.length > level) {
-        //     stack.pop();
-        // }
-        // // debugger;
-
-
-        // // 最小一级标题标号步进 + 1
-        // stack[stack.length - 1]++;
-        // // 生成标题标号( 1.1,1.2.. )
-        // var index = stack.join(".")
-        // // 生成标题ID
-        // var id = "title" + index;
-        // header.setAttribute('id', id);
-        // var li = document.createElement("li");
-        // addStyle(li, {
-        //     "listStyle": "none",
-        // })
-        // toc.appendChild(li);
-        // var a = document.createElement("a");
-        // addStyle(a, {
-        //     "color": "#0366d6",
-        //     "textOverflow ": "ellipsis"
-        // })
-        // // 为目录项设置链接
-        // a.setAttribute("href", "#" + id)
-        // // 目录项文本前面放置缩进空格
-        // a.innerHTML = new Array(level * 4).join('&nbsp;') + index + new Array(2).join('&nbsp;') + header.textContent;
-        // toc.lastChild.appendChild(a);
-
+        div_toc.appendChild(li);
+        div_toc.lastChild.appendChild(a);
     }
+
+    toc.appendChild(div_top);
+    toc.appendChild(div_toc);
+    toc.appendChild(div_right_bar);
     return toc;
 }
 
+
+// 这里是绑定resize事件的方法  
+function bindResize(el) {
+    //初始化参数
+    var els = document.getElementById('toc').style;
+    //鼠标的 X 和 Y 轴坐标
+    x = 0;
+     //邪恶的食指
+    el.onmousedown = function(e){
+        //按下元素后，计算当前鼠标与对象计算后的坐标
+        x = e.clientX - el.offsetWidth,
+        y = e.clientY - el.offsetHeight;
+        console.log(x);
+        //在支持 setCapture 做些东东
+        el.setCapture ? (
+        //捕捉焦点
+            el.setCapture(),
+        //设置事件
+            el.onmousemove = function (ev)
+            {
+                mouseMove(ev || event);
+            },
+            el.onmouseup = mouseUp
+        ) : (
+            function(){
+                document.addEventListener('mousemove',mouseMove,false);
+                document.addEventListener('mouseup',mouseUp,false);
+            }()
+        );
+        //防止默认事件发生
+        e.preventDefault();
+    }
+
+    //移动事件
+    function mouseMove(e) {
+        console.log(e);
+        // document.querySelector('#js-repo-pjax-container').style.paddingLeft = "0px";
+        // console.log
+        //宇宙超级无敌运算中...  
+        let w = document.body.clientWidth;
+        let w2 = e.clientX + 'px';
+        // haha xiecuole 
+        // els.width = e.clientX - x + 'px';
+        // 好的你来操作
+      
+        // if(e.clientX && e.clientX > (w-980)/2 ){
+        //     document.getElementsByTagName('html')[0].style.marginLeft = w2;
+        // }else{
+        //     document.getElementsByTagName('html')[0].style.marginLeft = '0px';
+        // }
+        // console.log(e.clientX);
+        // if(e.clientX > 100){
+
+        // }
+        // console.log("e.clientX " + e.clientX);
+    
+        
+        // var readmeWidth = document.getElementById("readme").clientWidth;
+        // var maxWidth = document.getElementById("readme").clientWidth * 0.8;
+        var minWidth = 200;
+        var moveWidth = parseInt(e.clientX);
+        if(moveWidth < 200){
+            return;
+        }
+        var $header = document.querySelector('.Header');
+       
+        
+        if(moveWidth > minWidth && e.clientX > containerClient.left){
+            document.getElementsByTagName('html')[0].style.marginLeft = w2;
+            $header.style.paddingLeft = 0 + 'px';
+            // $container.style.marginLeft = '10px';
+            $container.style.marginLeft = '10px';
+            $repoheadDetailsContainer.style.marginLeft = '10px';
+            $jsRepoNav.style.marginLeft = '10px';
+        }else{
+            $header.style.paddingLeft = moveWidth + 'px';
+            document.getElementsByTagName('html')[0].style.marginLeft = 0;
+            $container.style.marginLeft = 'auto';
+            $repoheadDetailsContainer.style.marginLeft = 'auto';
+            $jsRepoNav.style.marginLeft = 'auto';
+        }
+        els.width = e.clientX  + 'px';
+
+        return;
+        if( moveWidth > minWidth &&  e.clientX > (w-980)/2 ){
+            document.getElementsByTagName('html')[0].style.marginLeft = w2;
+            $header.style.paddingLeft = 0 + 'px';
+           
+        }
+
+
+        els.width = e.clientX  + 'px';
+    }
+    //停止事件
+    function mouseUp() {
+        //在支持 releaseCapture 做些东东
+        el.releaseCapture ? (
+            //释放焦点
+            el.releaseCapture(),
+            //移除事件
+            el.onmousemove = el.onmouseup = null
+        ) : (
+                function(){
+                    document.removeEventListener("mousemove", mouseMove);
+                    document.removeEventListener("mouseup", mouseUp);
+                }()               
+            );
+    }
+}
+
+window.onresize=function(){
+    //console.log(window.offsetWidth)
+}
+window.onscroll = function () {
+ var top = document.documentElement.scrollTop || document.body.scrollTop;
+ var left= document.documentElement.scrollLeft || document.body.scrollLeft;
+ //store.state.scrollLeft=top;
+ document.getElementById('toc').style.left=-left+"px";
+ 
+}

@@ -8,3 +8,4 @@ chrome.runtime.onMessage.addEventListener(bk);
 function bk(){
 	console.log("hello")
 }
+
