@@ -34,7 +34,29 @@ var domInit = function() {
   }
 };
 
-document.addEventListener("DOMContentLoaded", domInit, false);
+var pluginInit = function() {
+  domInit();
+  // 处理单页跳转，页面未重新加载问题
+  var github_progress = _$("#js-pjax-loader-bar");
+  var observer = new MutationObserver(function(mutations, observer) {
+    mutations.forEach(function(mutation) {
+      if (mutation.target.getAttribute("class").indexOf("is-loading") === -1) {
+        removeArtice();
+        domInit();
+      }
+    });
+  });
+  observer.observe(github_progress, { attributeFilter: ["class"] });
+};
+
+var removeArtice = function() {
+  var toc = _$("#toc");
+  if (toc) {
+    document.body.removeChild(toc);
+  }
+};
+
+document.addEventListener("DOMContentLoaded", pluginInit, false);
 
 function initTocBar(initWidth) {
   var els = _$("#toc").style;
