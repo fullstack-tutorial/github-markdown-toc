@@ -12,11 +12,7 @@ var addStyle = function(obj, atrr) {
 };
 
 // 全局变量
-var $container,
-  $repoheadDetailsContainer,
-  $jsRepoNav,
-  containerClient,
-  sideWidth;
+var $container, $repoheadDetailsContainer, $jsRepoNav, containerClient;
 
 // Github页面 过去一秒后开始加载元素 渲染toc目录
 var domInit = function() {
@@ -181,27 +177,69 @@ function init(list) {
     position: "absolute",
     bottom: "10px"
   });
-  var isExpand = true;
+  var isExpand = conversionBoolean(getCookie("github-markdown-toc-isShow"));
   div_shrink.addEventListener("click", function() {
     var div = _$("#toc"),
       w = div.clientWidth || div.offsetWidth;
-    if (isExpand) {
-      sideWidth = parseInt(
-        document.getElementsByTagName("html")[0].style.marginLeft
-      );
-      initTocBar(350);
-      addStyle(div, {
-        transform: "translateX(-" + w + "px)"
-      });
-    } else {
-      initTocBar(sideWidth);
-      addStyle(div, { transform: "translateX(0px)" });
-    }
+    isExpand
+      ? addStyle(div, {
+          transform: "translateX(-" + w + "px)"
+        })
+      : addStyle(div, { transform: "translateX(0px)" });
+    resetLayout(isExpand, w);
     isExpand = !isExpand;
+    setCookie("github-markdown-toc-isShow", isExpand);
   });
+  if (isExpand == false) {
+    toc.setAttribute("style", "transform: translateX(-350px)");
+  }
   toc.appendChild(div_shrink);
   return toc;
 }
+
+var resetLayout = function(isShow, w) {
+  var $header = _$(".Header"),
+    htmlMarginLeft = "0px",
+    headerPaddingLeft = "0px",
+    containerMarginLeft = "auto",
+    rdContainerMarginLeft = "auto",
+    jsRepoNavMarginLeft = "auto";
+  if (!isShow) {
+    if (w > containerClient.left) {
+      htmlMarginLeft = w + "px";
+      containerMarginLeft = "10px";
+      rdContainerMarginLeft = "10px";
+      jsRepoNavMarginLeft = "10px";
+    } else {
+      headerPaddingLeft = w + "px";
+    }
+  }
+  document.getElementsByTagName("html")[0].style.marginLeft = htmlMarginLeft;
+  $header.style.paddingLeft = headerPaddingLeft;
+  $container.style.marginLeft = containerMarginLeft;
+  $repoheadDetailsContainer.style.marginLeft = rdContainerMarginLeft;
+  $jsRepoNav.style.marginLeft = jsRepoNavMarginLeft;
+};
+
+var conversionBoolean = function(val) {
+  var obj = {
+    true: true,
+    false: false
+  };
+  return obj[val];
+};
+
+var setCookie = function(name, value) {
+  document.cookie = name + "=" + escape(value);
+};
+
+var getCookie = function(name) {
+  var arr,
+    reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+  if ((arr = document.cookie.match(reg))) return unescape(arr[2]);
+  else return null;
+};
 
 // 这里是绑定resize事件的方法
 function bindResize(el) {
