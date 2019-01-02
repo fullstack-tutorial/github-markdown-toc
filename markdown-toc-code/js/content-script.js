@@ -12,7 +12,11 @@ var addStyle = function(obj, atrr) {
 };
 
 // 全局变量
-var $container, $repoheadDetailsContainer, $jsRepoNav, containerClient;
+var $container,
+  $repoheadDetailsContainer,
+  $jsRepoNav,
+  containerClient,
+  sideWidth;
 
 // Github页面 过去一秒后开始加载元素 渲染toc目录
 var domInit = function() {
@@ -62,7 +66,6 @@ function initTocBar(initWidth) {
   var els = _$("#toc").style;
 
   //宇宙超级无敌运算中...
-  var w = document.body.clientWidth;
   var w2 = initWidth + "px";
 
   var minWidth = 200;
@@ -75,7 +78,6 @@ function initTocBar(initWidth) {
   if (moveWidth > minWidth && initWidth > containerClient.left) {
     document.getElementsByTagName("html")[0].style.marginLeft = w2;
     $header.style.paddingLeft = 0 + "px";
-    // $container.style.marginLeft = '10px';
     $container.style.marginLeft = "10px";
     $repoheadDetailsContainer.style.marginLeft = "10px";
     $jsRepoNav.style.marginLeft = "10px";
@@ -183,11 +185,18 @@ function init(list) {
   div_shrink.addEventListener("click", function() {
     var div = _$("#toc"),
       w = div.clientWidth || div.offsetWidth;
-    isExpand
-      ? addStyle(div, {
-          transform: "translateX(-" + w + "px)"
-        })
-      : addStyle(div, { transform: "translateX(0px)" });
+    if (isExpand) {
+      sideWidth = parseInt(
+        document.getElementsByTagName("html")[0].style.marginLeft
+      );
+      initTocBar(350);
+      addStyle(div, {
+        transform: "translateX(-" + w + "px)"
+      });
+    } else {
+      initTocBar(sideWidth);
+      addStyle(div, { transform: "translateX(0px)" });
+    }
     isExpand = !isExpand;
   });
   toc.appendChild(div_shrink);
