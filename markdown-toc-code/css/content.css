@@ -31,7 +31,7 @@
     padding: 20px;
     overflow: auto;
     overflow-x: hidden;
-    background-color: #fafbfc;
+    /* background-color: #fafbfc; */
     /* border: 1px solid #d1d5da; */
     border-right-width: 0;
 }
@@ -39,12 +39,27 @@
 .div_right_bar {
     /* width: 5px; */
     height: 100%;
-    background-color: #fafbfc;
+    /* background-color: #fafbfc; */
     cursor: col-resize;
     float: left;
     border-right: 1px solid #e1e4e8;
 }
 
+:root[data-color-mode="dark"] .div_toc {
+  background-color: #141b20;
+}
+
+:root[data-color-mode="dark"] .div_right_bar {
+  background-color: #141b20;
+}
+
+:root[data-color-mode="light"] .div_toc {
+  background-color: #fafbfc;
+}
+
+:root[data-color-mode="light"] .div_right_bar {
+  background-color: #fafbfc;
+}
 
 /* 这个地方 */
 
